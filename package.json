@@ -1,0 +1,36 @@
+{
+  "name": "estudio-juridico-backend",
+  "version": "1.0.0",
+  "description": "API del sistema de gestión de un estudio jurídico — Proyecto final Programación III (UTN INSPT)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/x-chama-x/estudio-juridico-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/x-chama-x/estudio-juridico-backend/issues"
+  },
+  "homepage": "https://github.com/x-chama-x/estudio-juridico-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
