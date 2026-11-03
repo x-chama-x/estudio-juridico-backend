@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import logger from "./logger";
 
 export async function connectDB() {
   const uri = process.env.MONGODB_URI
@@ -6,7 +7,6 @@ export async function connectDB() {
     throw new Error('Falta la variable MONGODB_URI en el .env')
   }
   await mongoose.connect(uri)
-  console.log('Conectado a MongoDB')
+  logger.info('Conectado a MongoDB')
 }
 
-// verificar por que no funciona la conexión npm run dev
