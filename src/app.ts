@@ -11,10 +11,7 @@ app.get('/api/salud', (_req, res) =>{
     res.json({status: 'ok'})
 }) // ruta que verifica el estado del servidor
 
-// Ruta temporal para probar el manejo de errores
-app.get('/api/prueba-error', () => {
-  throw new Error('Error de prueba')
-})
+//  registrar el manejo de errores de la app de express
 
 app.use(notFound)
 app.use(errorHandler)
