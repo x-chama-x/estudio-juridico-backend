@@ -12,6 +12,16 @@ export function errorHandler(err: Error, req: Request, res: Response, _next: Nex
     return
   }
 
+  if (err.name === 'ValidationError') {
+    res.status(400).json({ error: err.message })
+    return
+  }
+
+  if (err.name === 'CastError') {
+    res.status(400).json({ error: 'ID inválido' })
+    return
+  }
+
   logger.error(`Error inesperado en ${req.method} ${req.originalUrl}`, err)
   res.status(500).json({ error: 'Error interno del servidor' })
 }

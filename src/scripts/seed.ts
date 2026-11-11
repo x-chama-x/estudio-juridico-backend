@@ -1,6 +1,5 @@
 import '../config/env'
 import mongoose from 'mongoose'
-import bcrypt from 'bcryptjs'
 import { connectDB } from '../config/db'
 import { UsuarioModel } from '../models/Usuario'
 import logger from '../config/logger'
@@ -10,14 +9,12 @@ async function seed() {
 
   await UsuarioModel.deleteMany({})
 
-  const passwordHash = await bcrypt.hash('Password123', 10)
-
   await UsuarioModel.create([
     {
       nombre: 'Laura',
       apellido: 'Gómez',
       email: 'abogada@estudio.com',
-      password: passwordHash,
+      password: 'Password123',
       rol: 'abogado',
       matricula: 'T° 120 F° 45',
     },
@@ -25,7 +22,7 @@ async function seed() {
       nombre: 'Martín',
       apellido: 'Pérez',
       email: 'asistente@estudio.com',
-      password: passwordHash,
+      password: 'Password123',
       rol: 'asistente',
     },
   ])
