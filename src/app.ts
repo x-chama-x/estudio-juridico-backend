@@ -1,3 +1,4 @@
+import authRoutes from './routes/authRoutes'
 import express from 'express';
 import cors from 'cors';
 import { notFound,errorHandler } from './middleware/errorHandler';
@@ -10,6 +11,11 @@ app.use(express.json());
 app.get('/api/salud', (_req, res) =>{
     res.json({status: 'ok'})
 }) // ruta que verifica el estado del servidor
+
+
+// Registro las rutas de autenticación
+app.use('/api/auth', authRoutes) 
+
 
 //  registrar el manejo de errores de la app de express
 
