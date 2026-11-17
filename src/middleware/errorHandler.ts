@@ -22,6 +22,11 @@ export function errorHandler(err: Error, req: Request, res: Response, _next: Nex
     return
   }
 
+    if ((err as { code?: number }).code === 11000) {
+    res.status(409).json({ error: 'Ya existe un registro con ese dato único (DNI, CUIT o email)' })
+    return
+  }
+
   logger.error(`Error inesperado en ${req.method} ${req.originalUrl}`, err)
   res.status(500).json({ error: 'Error interno del servidor' })
 }
