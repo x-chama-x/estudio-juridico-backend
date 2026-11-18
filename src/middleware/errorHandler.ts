@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { AppError } from '../utils/AppError'
 import logger from '../config/logger'
+import { Error as MongooseError } from 'mongoose'
 
 export function notFound(req: Request, _res: Response, next: NextFunction) {
   next(new AppError(404, `No existe la ruta ${req.method} ${req.originalUrl}`))
@@ -12,8 +13,9 @@ export function errorHandler(err: Error, req: Request, res: Response, _next: Nex
     return
   }
 
-  if (err.name === 'ValidationError') {
-    res.status(400).json({ error: err.message })
+  if (err instanceof MongooseError.ValidationError) {
+    const mensajes = Object.values(err.errors).map((e) => e.message)
+    res.status(400).json({ error: mensajes.join('. ') })
     return
   }
 

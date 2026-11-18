@@ -1,4 +1,5 @@
 import authRoutes from './routes/authRoutes'
+import clientesRoutes from './routes/clientesRoutes'
 import express from 'express';
 import cors from 'cors';
 import { notFound,errorHandler } from './middleware/errorHandler';
@@ -15,6 +16,10 @@ app.get('/api/salud', (_req, res) =>{
 
 // Registro las rutas de autenticación
 app.use('/api/auth', authRoutes) 
+
+// Registro las rutas de clientes
+app.use('/api/clientes', clientesRoutes)
+
 
 
 //  registrar el manejo de errores de la app de express
