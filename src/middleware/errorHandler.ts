@@ -26,7 +26,12 @@ export function errorHandler(err: Error, req: Request, res: Response, _next: Nex
 
   if ((err as { code?: number }).code === 11000) {
     const campo = Object.keys((err as { keyValue?: object }).keyValue ?? {})[0]
-    const nombres: Record<string, string> = { dni: 'DNI', cuit: 'CUIT', email: 'email' }
+    const nombres: Record<string, string> = {
+      dni: 'DNI',
+      cuit: 'CUIT',
+      email: 'email',
+      'datosJudiciales.jurisdiccion': 'número de expediente',
+    }
     const nombre = nombres[campo] ?? 'dato'
     res.status(409).json({ error: `Ya existe un registro con ese ${nombre}` })
     return
