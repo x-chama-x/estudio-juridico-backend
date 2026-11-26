@@ -3,6 +3,7 @@ import { ClienteModel } from '../models/Cliente'
 import { AppError } from '../utils/AppError'
 import { leerPaginacion } from '../utils/paginacion'
 import { escaparRegex } from '../utils/escaparRegex'
+import { ExpedienteModel } from '../models/Expediente'
 
 const CAMPOS_COMUNES = ['email', 'telefono', 'domicilio']
 const CAMPOS_FISICA = ['nombre', 'apellido', 'dni']
@@ -90,7 +91,15 @@ export async function cambiarEstadoCliente(req: Request, res: Response) {
     throw new AppError(404, 'Cliente no encontrado')
   }
 
-  // TODO (rebanada 3): si activo es false, responder 409 si el cliente tiene expedientes no archivados
+    if (activo === false) {
+    const abiertos = await ExpedienteModel.countDocuments({
+      cliente: cliente._id,
+      estado: { $ne: 'archivado' },
+    })
+    if (abiertos > 0) {
+      throw new AppError(409, `No se puede dar de baja: el cliente tiene ${abiertos} expediente(s) sin archivar`)
+    }
+  }
 
   cliente.activo = activo
   await cliente.save()
