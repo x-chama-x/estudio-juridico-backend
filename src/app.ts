@@ -4,6 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import { notFound,errorHandler } from './middleware/errorHandler';
 import expedienteRoutes from './routes/expedientesRoutes';
+import usuariosRoutes from './routes/usuariosRoutes'
 
 const app = express(); // instancia de la aplicación Express
 
@@ -23,6 +24,9 @@ app.use('/api/clientes', clientesRoutes)
 
 // Registro las rutas de expedientes
 app.use('/api/expedientes', expedienteRoutes)
+
+// Registro las rutas de usuarios
+app.use('/api/usuarios', usuariosRoutes)
 
 
 //  registrar el manejo de errores de la app de express
